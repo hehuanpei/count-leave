@@ -15,23 +15,22 @@ def customDate(year, month, day):
 
 def createGroups():
     with SqlManager(__dbaddress__) as s:
-        # try:
+         try:
             s.execute('''CREATE TABLE Groups(
              id INTEGER primary key autoincrement,
              nickname TEXT UNIQUE)''')
-        # except sqlite3.OperationalError:
-            # pass
-
+         except sqlite3.OperationalError:
+             pass
 
 def insertTheNameOfGroupIntoGroups(groups_nickname: iter):
     # if not exist Groups table then create it.
     createGroups()
     with SqlManager(__dbaddress__) as s:
         for i in groups_nickname:
-            # try:
-                s.execute('INSERT INTO Groups (nickname) values (?)', (i,))
-            # except:
-                # pass
+            try:
+                s.execute('INSERT INTO Groups (nickname) values (?)',(i,))
+            except:
+                pass
 
 
 def fetchAllGroupName()->list:
